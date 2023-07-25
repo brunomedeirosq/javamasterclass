@@ -1,0 +1,101 @@
+jshell commands:
+/list
+/var
+
+#wrapper classes for primitive data types with additional information like:
+Integer.MIN_VALUE
+Integer.MAX_VALUE
+
+#to get width for different primitive data types that allow different whole number sizes:
+Integer.SIZE
+Short.SIZE
+Long.SIZE
+
+#important concept of overflow and underflow that the compiler will not evalute as error and will cause miss behavior caused from trying to store a size number in the wrong data type
+
+#default data type for numbers in java is "int" even if we declare "long myNumber = 2147483648;", this will cause error since we need to put a sufix "L" to force java to deal with our number as long like this, "long myNumber = 2147483648L;"
+
+jshell> Integer.MAX_VALUE
+$17 ==> 2147483647
+
+jshell> long myValue = 2147483647;
+myValue ==> 2147483647
+
+jshell> long myValue = 2147483648;
+|  Error:
+|  integer number too large
+|  long myValue = 2147483648;
+|
+
+jshell> long myValue = 2147483648L;
+myValue ==> 2147483648
+
+double is the default data type for floating point numbers since it's more precise than float, it's larger and more precise than a float
+
+bit is the smallest unit of data containing at most 2 logical states, normally 0 and 1
+
+8 bits combine to make a single unit of addressable memory, called a “Byte”
+
+however java byte with small "b" is a java primitive data type capable of storing 8 bits at a time
+
+Byte.SIZE = 8 bits (in this case java Byte is a java wrapper class for primitive data type byte that have useful and additioal information such as max and min value, or size/width). Java Byte is a wrapper class used to store the primitive data type “byte” for easier access to built-in advanced functions.
+
+https://codegym.cc/groups/posts/java-byte-keyword
+
+double > 64 bits > 8 Bytes memory to store a number
+
+float > 32 bits > 4 Bytes memory to store a number
+
+1 Byte = 8 bits
+
+Exame question:
+To assign a double value (java default data type for floating numbers, decimal or real numbers) to a float variable we need to cast or use the sufix "F"/"f", since if we try to set a double (more precise data type) into a less precise data type like float the compiler will raise an error.
+
+float myFloatNumber = 5.25; > ERROR
+float myFloatNumber = 5.25F; > OK
+float myFloatNumber = 5.25f; > OK
+float myFloatNumber = (float) 5.25; > OK
+
+char occupies 2 bytes of memory, or 16 bits, and thus has a witdh of 16 > the reason it's not just a single byte, is that a char is stored as a 2 byte number, similar to the short. This number gets mapped to a single character by Java.
+
+unicode is an international encoding standard for use with different languages and scripts by which each letter, digit, or symbol is assigned a unique numeric value that applies across different platforms and programs.
+
+Unicode examples:
+
+U+0044
+jshell> '\u0044'
+$43 ==> 'D'
+
+Dec 68
+jshell> char test = 68;
+test ==> 'D'
+
+Important concept in JAVA: classes in Java are custom data types
+
+String concatenation > A String + anything else, gives us a String as a result, concatenating anything after the String as text to the initial String.
+
+String class is immutable!
+StringBuilder classe is mutable!
+
+Importante example when using "variable++;" or "variable+=1;" as example 
+
+jshell> {
+   ...>     int result = 10;
+   ...>     result -= 5.5;
+   ...>     System.out.print(result);
+   ...> }
+4
+
+the above expression is equal to
+
+jshell> result = (int) (10 - 5.5)
+result ==> 4
+
+jshell> 10 - 5.5
+$68 ==> 4.5
+
+since the result is int data type when using result -= 5.5; java is doing (int) (10 - 5.5), casting to int, so the result is only the whole number 4, the integer part and the decimal part is discarted.
+
+
+
+
