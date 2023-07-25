@@ -1,0 +1,19 @@
+git fectch
+
+The git fetch command will retrieve the latest changes from the remote repository (such as GitHub) to your local repository without automatically merging them. 
+This command updates your remote-tracking branches, allowing you to see the changes that have been made in the remote repository since your last fetch or pull.
+After running git fetch, you can compare the changes between your local and remote branches. To do this, use the git log command or git diff command.
+
+git log origin/main
+
+To view the commit history of your remote branch (e.g., "main" branch)
+
+git diff main origin/main
+
+This will display the differences between your local "main" branch and the remote "main" branch.
+
+Keep in mind that git fetch only updates the remote-tracking branches in your local repository. 
+To actually apply the changes to your local branch, you'll need to use git merge or git pull after running git fetch. If you use git pull, it will automatically fetch and merge the changes for you.
+
+Remember to be careful when merging or pulling changes, as it can lead to conflicts if there are conflicting changes between your local and remote branches. 
+It's always a good idea to review the changes first using git log or git diff before proceeding with the merge or pull.
