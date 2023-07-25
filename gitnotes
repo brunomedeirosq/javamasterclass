@@ -1,3 +1,7 @@
+git clone https://github.com/brunomedeirosq/javamasterclass.git
+
+The repository will be cloned with all its branches, commit history, and files. You will have a local copy of the remote repository in the specified folder.
+
 git fectch
 
 The git fetch command will retrieve the latest changes from the remote repository (such as GitHub) to your local repository without automatically merging them. 
