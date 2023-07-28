@@ -96,6 +96,51 @@ $68 ==> 4.5
 
 since the result is int data type when using result -= 5.5; java is doing (int) (10 - 5.5), casting to int, so the result is only the whole number 4, the integer part and the decimal part is discarted.
 
+Intellij Notes:
+
+using "psvm" and "tab" intellij will add the main class method declaration automatically
+
+"public" java keyword is called an "access modifier" for java classes and allows us to define which parts of our code, or even someone else's code, can access a particular element.
+"public" access modifier means other code can access this class.
+
+"method" in java is collection of statements, one or more, that perform an operation
+
+method called "main" is a special java method that java will looks when running a program. it's the entry point for any java code.
+
+"if-then-else statement" most basic control flow statements called conditional logic
+
+= assign
+
+== equal operator that will evaluate on true or false
+
+always use code block, {}
+
+ampersand operator && (AND operator, both conditions should evaluate true)
+
+two pipes operator || operator (OR operator, it enough that one of the conditions evaluate true)
+
+! exclamation mark or NOT operator is Logical Complement Operator, it can be used for boolean variables to test the opposite value
+
+boolean isCar = false;
+
+careful when using if (isCar = true) since this mistake will set isCar to true and execute the block of code under if condition. we must use == operator to compare and not = to assign
+
+ternary operator is a conditional operator that has three operands. the ternary operator is a shortcut to assigning one of two values to a variable, depending on a given condition
+it's like a shortcut of the if-then-else statement
+
+operand1 ? operand2 : operand3
+
+operand 1 must be a condition that evaluates into a boolean result or must be a boolean variable
+operand 2 can be any data type and will be returned when operand 1 is true
+operand 3 can be any data type and will be returned when operand 1 is false
+
+boolean isDomestic = (makeOfCar == "Volkswagen") ? false : true;
+
+its equivalent to
+
+boolean isDomestic = (makeOfCar!="Volkswagen"); //this assignment to a boolean variable of the condition result is more easy to read than the ternary operator example
+
+
 
 
 
