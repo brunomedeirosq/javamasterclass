@@ -1,3 +1,12 @@
+useful intelij shortcuts:
+CTRL + ALT + L reformat code
+CTRL+ W select several block of code
+psvm create the public static void main method
+sout create a system out println
+
+
+
+
 jshell commands:
 /list
 /var
@@ -139,6 +148,27 @@ boolean isDomestic = (makeOfCar == "Volkswagen") ? false : true;
 its equivalent to
 
 boolean isDomestic = (makeOfCar!="Volkswagen"); //this assignment to a boolean variable of the condition result is more easy to read than the ternary operator example
+
+Java code units as important concepts:
+
+expression - an expression computes to a single value (does not include ; or data type from variables definition)
+
+eg: int highscore = 50;
+the expression is only: "highscore = 50"
+
+eg: double kilometers = (100 * 1.609344);
+the expression is only: "kilometers = (100 * 1.609344)"
+the expression is also: "(100 * 1.609344)"
+
+statement - statements are stand alone units of work
+
+eg: double kilometers = (100 * 1.609344);
+the complete line above is a java statement, including data type double and semicolon ;
+
+code of blocks - code block is a set of zero, one or more statements, usually grouped together in some way to achieve a single goal
+
+
+
 
 
 
