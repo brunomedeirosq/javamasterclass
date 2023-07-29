@@ -1,6 +1,9 @@
 useful intelij shortcuts:
 CTRL + ALT + L reformat code
 CTRL+ W select several block of code
+CTRL + K open git commit tab
+ALT + 1 open and close project window
+
 psvm create the public static void main method
 sout create a system out println
 
