@@ -6,24 +6,28 @@ public class MainChallenge {
         int levelCompleted = 5;
         int bonus = 100;
 
+        int highScore = calculateScore(gameOver, score, levelCompleted, bonus);
+        System.out.println("Your high score is " + highScore);
+
+        score = 10_000;
+        levelCompleted = 8;
+        bonus = 200;
+
+        System.out.println("Your next high score is " + calculateScore(gameOver, score, levelCompleted, bonus));
+    }
+
+    public static int calculateScore(boolean gameOver, int score, int levelCompleted, int bonus) {
+
         int finalScore = score;
 
         if (gameOver) {
             finalScore += (levelCompleted * bonus);
-            System.out.println("Your final score was " + finalScore);
+            finalScore += 1000;
+
         }
 
-        //challenge lesson 44
-        //assign to already declared and initialized variables a new value
-        score = 10_000;
-        //set finalScore variable again to score value, the new score value
-        finalScore = score;
-        levelCompleted = 8;
-        bonus = 200;
+        return finalScore;
 
-        if (gameOver) {
-            finalScore += (levelCompleted * bonus);
-            System.out.println("Your final score was " + finalScore);
-        }
     }
+
 }

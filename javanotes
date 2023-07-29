@@ -170,6 +170,11 @@ the complete line above is a java statement, including data type double and semi
 
 code of blocks - code block is a set of zero, one or more statements, usually grouped together in some way to achieve a single goal
 
+java methods concept: A method declares executable code that can be invoked, passing a fixed number of values as arguments
+
+technically, a parameter is the definition as shown in the method declaration, and the argument will be the value that's passed to the method when we call it
+
+
 
 
 
