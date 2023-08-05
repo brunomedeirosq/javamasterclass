@@ -106,7 +106,7 @@ result ==> 4
 jshell> 10 - 5.5
 $68 ==> 4.5
 
-since the result is int data type when using result -= 5.5; java is doing (int) (10 - 5.5), casting to int, so the result is only the whole number 4, the integer part and the decimal part is discarted.
+since the result is int data type when using result -= 5.5; java is doing (int) (10 - 5.5), casting to int, so the result is only the whole number 4, the integer part and the decimal part is discarded.
 
 Intellij Notes:
 
@@ -173,6 +173,29 @@ code of blocks - code block is a set of zero, one or more statements, usually gr
 java methods concept: A method declares executable code that can be invoked, passing a fixed number of values as arguments
 
 technically, a parameter is the definition as shown in the method declaration, and the argument will be the value that's passed to the method when we call it
+
+some programing languages make a difference between a method that return a value as a function, and a method that doesn't return a value, or void as procedure.
+
+declaring the method:
+declaring modifiers like public or static, there are others
+declaring the return type:
+void is java keyword meaning no data is returned from a method
+alternatively, the return type can be any primitive data type or class
+if a return type is defined, the code block must use at least one return statement, returning a value, of the declared type or comparable type
+
+A method is uniquely defined in a class by it's name, and the number and type of parameters that are declared for it. This is called the method signature.
+
+You can have multiple methods with the same method name, as long as the method signature (meaning the parameters declared) are different.
+
+java doesn't support default values for parameters. In Java the number of arguments you pass, and their type,
+must match the parameters in the method declaration exactly
+
+The "main" method is a special method for Java and we can't define methods inside methods, they should be defined inside the class curly brackets,
+however we can call methods inside other methods, in this case we can use main method to call our own methods.
+
+
+
+
 
 
 
