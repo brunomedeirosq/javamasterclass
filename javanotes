@@ -208,3 +208,99 @@ IMPORTANT: The type, order, and number of parameters, in conjunction with the na
 A unique method signature is the key for the java compiler, to determine if a method is overloaded correctly.
 The name of the parameter is not part of the signature, and therefore it doesn't matter, from the java's point of view, what we call our parameters.
 
+key control flow statements in java:
+switch statement (execute different code blocks based on different conditions)
+three additional statements,
+for statement (repeat code segments based on conditions)
+while statement (repeat code segments based on conditions)
+do while statement (repeat code segments based on conditions)
+
+NOTE: switch allow something like the following example, several conditions (case 4: case 5: case 6:) value execute the same code:
+
+switch (testValue) {
+            case 1:
+                System.out.println("Value is " + testValue);
+                break;
+            case 2:
+                System.out.println("Value is " + testValue);
+                break;
+            case 3:
+                System.out.println("Value is " + testValue);
+                break;
+            case 4: case 5: case 6:
+                System.out.println("Value is " + testValue);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + testValue);
+        }
+
+switch (testValue) {
+            case 1 -> System.out.println("Value is " + testValue);
+            case 2 -> System.out.println("Value is " + testValue);
+            case 3 -> System.out.println("Value is " + testValue);
+            case 4, 5, 6 -> System.out.println("Value is " + testValue);
+            default -> throw new IllegalStateException("Unexpected value: " + testValue);
+        }
+
+public static String getQuarter(String month) {
+        switch (month) {
+            case "January": case "February": case "March":
+                return "First quarter";
+            case "April": case "May": case "June":
+                return "Second quarter";
+            case "July": case "August": case "September":
+                return "Third quarter";
+            case "October": case "November": case "December":
+                return "Fourth quarter";
+        }
+        return "Unexpected month: " + month;
+    }
+
+NOTE: in this example we don't need to use break in switch, since return will prevent the following block of code to be executed.
+Also we don't need to use default in the switch since the return will exit the method with "default" code to be executed. However we could something like this
+but will through an java exception and break the main method code execution.
+
+public static String getQuarter(String month) {
+        switch (month) {
+            case "January": case "February": case "March":
+                return "First quarter";
+            case "April": case "May": case "June":
+                return "Second quarter";
+            case "July": case "August": case "September":
+                return "Third quarter";
+            case "October": case "November": case "December":
+                return "Fourth quarter";
+            default:
+                throw new IllegalStateException("Unexpected month: " + month);
+        }
+    }
+
+public static String getQuarterEnhanced(String month) {
+        return switch (month) {
+            case "January", "February", "March" -> "First quarter";
+            case "April", "May", "June" -> "Second quarter";
+            case "July", "August", "September" -> "Third quarter";
+            case "October", "November", "December" -> "Fourth quarter";
+            default -> {
+                String badResponse = month + " is bad";
+                yield badResponse;
+            }
+        };
+    }
+
+NOTE: When to use yield in a switch - Your switch statement is being used as a switch expression returning a value. Needs to be used in curly braces like { yield "test"}
+
+Valid switch value types:
+
+byte, short, int, char
+Byte, Short, Integer, Character
+String
+enum
+
+Important: Cannot use long, float, double or boolean or their wrappers.
+
+Important concept switch behavior: once a switch case label matches the switch variable, no more cases are checked. Any code
+after the case label where there was a match found, will be executed, until a break statement, or the end of the switch statement occurs.
+
+
+
