@@ -3,6 +3,11 @@ CTRL + ALT + L reformat code
 CTRL+ W select several block of code
 CTRL + K open git commit tab
 ALT + 1 open and close project window
+CTRL+D duplicate selected content on new line
+SHIFT+F9 debug run (main)
+F8 when on debug to step over
+SHIFT+F10 normal run (main)
+
 
 psvm create the public static void main method
 sout create a system out println
@@ -82,7 +87,7 @@ Dec 68
 jshell> char test = 68;
 test ==> 'D'
 
-Important concept in JAVA: classes in Java are custom data types
+Important concept in JAVA: classes in Java are custom data types. Also a special code block that contain methods.
 
 String concatenation > A String + anything else, gives us a String as a result, concatenating anything after the String as text to the initial String.
 
@@ -301,6 +306,86 @@ Important: Cannot use long, float, double or boolean or their wrappers.
 
 Important concept switch behavior: once a switch case label matches the switch variable, no more cases are checked. Any code
 after the case label where there was a match found, will be executed, until a break statement, or the end of the switch statement occurs.
+
+
+Looping three statements:
+
+for (for statement == for loop) - The for loop is more complex to set up but is commonly used when you are iterating over a set of values.
+it repeatedly loops something until a condition is satisfied.
+while - The while loop executes until a specified condition becomes false
+do while - The do while loop always executes at least one and continues until a specified condition becomes false
+
+Attention: do while loop needs a semicolon to end the while expression and the other loop statements don't.
+
+ for (int i = 1; i <= 5; i++) {
+             System.out.println(i);
+         }
+
+ int j = 1;
+ while (j <= 5) {
+     System.out.println(j);
+     j++;
+ }
+
+ int k = 1;
+ while (true) {
+     if (k > 5) {
+         break;
+     }
+     System.out.println(k);
+     k++;
+ }
+
+ int z = 1;
+ boolean isReady = false;
+  do {
+      if (z > 5) {
+          break;
+      }
+      System.out.println(z);
+      z++;
+  } while (isReady);
+
+int number = 0;
+        while (number < 50) {
+            number += 5;
+
+            if (number % 25 == 0) {
+            continue;
+            }
+            System.out.print(number + "_");
+        }
+
+Attention: check above the use of continue that will prevent the sout statement to be executed when number is evenly divided by 25 and assure that the loop keep executing until the expression is false.
+
+Continue and break on loops:
+- the "continue" and "break" statements both interrupt normal loop processing.
+- the "continue" statement starts a new iteration, but continues to iterate through the loop.
+- the "break" statement exits the loop, at the point it's executed, and no longer completes any code in the loop, and won't continue iterating any longer.
+
+Scope: describes the accessibility of a variable. 'In scope' means the variable can be used by an executing block or any nested blocks.
+'out of scope' means the variable is no longer available.
+Local variables are always in scope, in the block they are declared.
+They are also in scope for any nested blocks, os blocks contained within the outer block.
+
+Scope best practices:
+- to declare and initialize variables in the same place if possible
+- and to declare variables in the narrowest scope possible
+
+Attention: Local variables are a way to store and manipulate temporary data. In adition to local variables, we can set up data to be defined,
+and used as part of a class, or an object.
+
+Important concepts in JAVA:
+- classes in Java are custom data types. Also a special code block that contain methods.
+- an object is called an instance of a particular class (objects and instances are interchangeable terms).
+- create a object == "instantiating a class"
+
+difference between static field and instance field: check slide 69 regarding to table with differences!! (MUITO MUITO IMPORTANTE)
+
+
+
+
+
 
 
 
