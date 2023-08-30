@@ -7,6 +7,7 @@ CTRL+D duplicate selected content on new line
 SHIFT+F9 debug run (main)
 F8 when on debug to step over
 SHIFT+F10 normal run (main)
+ALT+F7 quick locate references for the highlighted word
 
 
 psvm create the public static void main method
@@ -382,10 +383,84 @@ Important concepts in JAVA:
 
 difference between static field and instance field: check slide 69 regarding to table with differences!! (MUITO MUITO IMPORTANTE)
 
+Parsing Techniques in Java:
 
+System.in
 
+System.console (example: System.console().readline("Hi, what's your name?");) -> in this case we used the method System.console().readline() to read input from command line
 
+Command Line Arguments - This is calling the java program and specifying data in the call but doesn't let us create an interactive application in a loop in Java.
 
+Scanner:
+The scanner class is decribed as a simple text scanner, which can parse primitive types and strings.
+To use the Scanner class, we have to create an instance of Scanner. This means we're creating an object of type Scanner (key word "new").
 
+Class Instance Creation Expression:
+Classname variablename = new Classname();
+
+For reading input from the console or terminal, we instantiate a scanner object using new, followed by the Scanner classname, and passing System.in, in the
+parentheses.
+
+Scanner scanner = new Scanner(System.in);
+
+String name = scanner.nextLine();
+
+Note: scanner is an instance of class Scanner, scanner is a local object (local variable named scanner) that we can use to execute instance methods,
+like nextLine() method, this is an instance method on scanner object.
+
+For reading input from a file, same thing but passing as argument a File object in the parentheses.
+
+File is another class provided by Java to reading and writing files.
+
+Scanner scanner = new Scanner(new File("nameOfFileOnFileSystem"));
+
+Note: "import java.util.Scanner" importing the class Scanner from library java.util
+
+Exceptions in Java:
+An exception is an error that happens in code. Some types of errors can be predicted and named.
+
+An exception (or exceptional event) is a problem that arises during the execution of a program. When an Exception occurs the normal
+flow of the program is disrupted and the program/Application terminates abnormally, which is not recommended, therefore, these exceptions are to be handled.
+
+An exception can occur for many different reasons. Following are some scenarios where an exception occurs.
+
+- A user has entered an invalid data.
+
+- A file that needs to be opened cannot be found.
+
+- A network connection has been lost in the middle of communications or the JVM has run out of memory.
+
+NOTE: Some of these exceptions are caused by user error, others by programmer error, and others by physical resources that have failed in some manner.
+
+Based on these, we have three categories of Exceptions. You need to understand them to know how exception handling works in Java.
+
+Checked exceptions − A checked exception is an exception that is checked (notified) by the compiler at compilation-time,
+these are also called as compile time exceptions. These exceptions cannot simply be ignored, the programmer should take care of (handle) these exceptions.
+
+For example, if you use FileReader class in your program to read data from a file, if the file specified in its constructor doesn't exist,
+then a FileNotFoundException occurs, and the compiler prompts the programmer to handle the exception.
+
+Note − Since the methods read() and close() of FileReader class throws IOException,
+you can observe that the compiler notifies to handle IOException, along with FileNotFoundException.
+
+Unchecked exceptions − An unchecked exception is an exception that occurs at the time of execution. These are also called as Runtime Exceptions.
+These include programming bugs, such as logic errors or improper use of an API. Runtime exceptions are ignored at the time of compilation.
+
+For example, if you have declared an array of size 5 in your program, and trying to call the 6th element of the array then an ArrayIndexOutOfBoundsExceptionexception occurs.
+
+Errors − These are not exceptions at all, but problems that arise beyond the control of the user or the programmer.
+Errors are typically ignored in your code because you can rarely do anything about an error. For example, if a stack overflow occurs, an error will arise.
+They are also ignored at the time of compilation.
+
+Note - StackOverflowError is a runtime error which points to serious problems that cannot be caught by an application.
+The java. lang. StackOverflowError indicates that the application stack is exhausted and is usually caused by deep or infinite recursion.
+
+We can handle Exceptions with try catch block to handle specific exceptions (errors) from our code.
+
+        try {
+            //statements that might get errors
+        } catch (Exception e) {
+            //code to 'handle' the exception
+        }
 
 
