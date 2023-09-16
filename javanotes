@@ -8,6 +8,7 @@ SHIFT+F9 debug run (main)
 F8 when on debug to step over
 SHIFT+F10 normal run (main)
 ALT+F7 quick locate references for the highlighted word
+ALT+INSERT generate code like getters and setters
 
 
 psvm create the public static void main method
@@ -462,5 +463,325 @@ We can handle Exceptions with try catch block to handle specific exceptions (err
         } catch (Exception e) {
             //code to 'handle' the exception
         }
+
+##############################################################################################
+
+OOP Object Oriented Programming
+
+In OOP encapsulation has two meanings:
+1.º bundling of behavior (methods) and attributes (fields) on a single object.
+2.º practice of hiding fields, and some methods, from public access.
+
+##############################################################################################
+
+State and behavior:
+
+So modelling real world objects as software objects, is a fundamental part of Object Oriented Programming.
+
+A software object stores its state in fields, which can also be called variables, or attributes.
+
+And objects expose their behavior with methods.
+
+A class is a template or a blueprint for creating objects. The class describes the data (fields), and the behavior (methods), that are relevant to the real world
+object we want to describe. Fields and methods are class members. A class member can be a field, or a method, or some other type of dependent element.
+
+Important:
+- If a field is static, there is only one copy in memory, and this value is associated with the class, or template, itself.
+- If a field is not static, it's called an instance field, and each object may have a different value stored for this field.
+- A static method can't be dependent on any one object's state, so it can't reference any instance members. In other words,
+any method that operates on instance fields, needs to be non-static.
+
+##############################################################################################
+
+Organizing classes - Classes can be organized into logical groupings, which are called packages. If we don't declare a package, the class implicitly belongs
+to the default package.
+
+A class is said to be a top-level class, if it is defined in the source code file, and not enclosed in the code block of another class type, or method.
+
+A top-level class has only two valid "access modifier" options: public, none.
+
+public - public means any other class in any package can access this class
+       - when the modifier is omitted, this has a special meaning, called package access, meaning the class is accessible only to classes in the same package
+
+An access modifier at the "member level", allows granular control over class members:
+public - public means any other class in any package can access this class
+protected - protected allows classes in the same package, and any subclasses in other packages, to have access to the member
+          - when the modifier is omitted, this has a special meaning, called package access, meaning the member is accessible only to classes in the same
+          package
+private - private means that no other class can access this member
+
+Important: As a general rule, all fields should be private (encapsulation), unlike the class, where usually we use public.
+
+Example:
+
+public class Car {
+
+    //five fields for class Car
+    //they are defined in the class's code block instead of being declared inside methods like local variables
+    //when we create an object from this class then the values we assign to these fields represent the state of the object
+    //unlike local variables, class variables should have some type of access modifier declared for it
+    //if we don't declare a modifier to class variables Java declares the default one (package private), implicitly.
+    private String make;
+    private String model;
+    private String color;
+    private int doors;
+    private boolean convertible;
+
+}
+
+##############################################################################################
+
+null is a special keyword in java, meaning the variable or attribute has a type, but no reference to an object.
+
+This means that no instance, or object, is assigned to the variable or field.
+
+Fields with primitive data types are never null.
+
+Default values for fields on classes - Fields on classes are assigned default values, intrinsically by Java, if not assigned explicitly.
+
+fields with primitive data type as the following default values:
+boolean as default value assigned false
+byte, short, int, long, char as default value assigned 0
+double and float as default value assigned 0.0
+
+other types like String will have default value null (String is not a primitive type, but an object from java class String).
+
+//getters and setters
+getter - is a method on a class, that retrieves the value of a private field, and returns it.
+setter - is a method on a class, that sets the value of a private field.
+The purpose of these methods is to control, and protect, access to private fields.
+
+Note: the getter and setter method signatures are part of car's public interface, but the attribute names and types aren't. This means that
+we could change name of the fields, our internals in our class, but the methods that allow access and modify our fields remains the same so
+every use of our class remains untouched and working as expected.
+
+"this" is a special keyword in Java
+What it really refers to is the instance that was created when the object was instantiated.
+So this is a special reference name for the object or instance, which it can use to describe itself.
+And we can use this to access fields on the class.
+
+Important:
+
+An uninitialized variable, as we saw in the first instance, causes a compile time error.
+example:
+Car car;
+car.setMake("Porsche");
+
+An initialized variable with null reference will not cause compile time error but will throw an exception at runtime.
+example:
+Car car = null; (doesn't have a reference to valid instance of a car)
+car.setMake("Porsche");
+
+##############################################################################################
+
+A constructor is used in the creation of an object, that's an instance of a class.
+
+It is a special type of code block that has a specific name and parameters, much like a method.
+
+It has the same name as the class itself, and it doesn't return any values.
+
+You never include a return type from a constructor, not even void.
+
+We should specify an appropriate access modifier, to control who should be able to create new instances of the class.
+
+public class Account { //this is the class declaration
+
+ public Account() { //this is the constructor declaration
+    //constructor code is code to be executed as the object is created
+ }
+}
+
+If a class contains no constructor declarations, then a default constructor is implicitly declared.
+
+This constructor has no parameters, and is often called the no-args (no arguments) constructor.
+
+If a class contains any other constructor declarations, then a default constructor is NOT implicitly declared.
+
+The purpose of the constructor is, to essentially initialize the object that we are creating, and do whatever else we need to happen,
+while the object is being instantiated.
+
+Constructors overloading is declaring multiple constructors, with different formal parameters.
+
+The number of parameters can be different between constructors.
+
+Or if the number of parameters is the same between two constructors, their type or order of the types must differ.
+
+Important concept: Constructor Chaining - which is the process of calling one overloaded constructor from another. So constructor chaining,
+                    is when one constructor explicitly calls another overloaded constructor.
+
+    NOTE: - constructor can only be called from another constructor
+          - special statement this() is mandatory to execute another constructor, passing it arguments if required
+          - this() must be first executable statement, if it's used from another constructor
+
+    Rule of thumb: in constructors don't call setters or any other method, other than another constructor within those constructors.
+
+example of overloading constructor:
+
+public Account(int accountNumber, double accountBalance, String customerName, String email, String phoneNumber) {
+        System.out.println("Account constructor with parameters called");
+        this.accountNumber = accountNumber;
+        this.accountBalance = accountBalance;
+        this.customerName = customerName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    //constructor chaining
+    public Account() {
+        //special use of this with () and parameters that match in order the type from the constructor with same name but with the specified parameters
+        this(5876, 2.5, "Bruno", "brunoq@gmail.com", "916905477");
+        System.out.println("Empty constructor called");
+    }
+
+##############################################################################################
+
+reference, object, instance, class meaning in the context of Java programming:
+
+building house analogy with class (plans == template == blueprint == class) and objects (instance of the class)
+
+- class is a blueprint (template) for the house - this means we can build as many houses as we like, based on those plans (blueprints/templates)
+
+- object is one of the houses we build based on the plans - this means each house built(object) is an instance of the class
+
+- reference, each house (object) we build has an address (a physical location) - This means we have a reference where the house (object) is located
+
+Note: references to objects can be copied without touching the object itself, we only are manipulating the physical location to the house and not the house itself.
+      we can pass references as parameters to constructors and methods.
+
+Important: In Java we always have a reference to an object in memory through a variable, like in the following example. We can't access directly an object, in
+            Java the only thing we have is reference stored in a variable to the place in memory where the object is stored.
+
+House blueHouse = new House("blue"); //this line we are instantiating a new object from class House and saving the reference to this object in variable "blueHouse"
+House anotherHouse = blueHouse; //this line we are copying and saving the reference in memory to the same object previously instantiated
+
+//so in blueHouse and anotherHouse we have with these statements the reference for the same object in memory
+
+Note:
+
+new House("red"); // in this statement a new object was created from class House but we didn't create a reference to the new object. So the object exists in
+                    memory, it's possible to compile without errors, but we can't communicate with it, after the statement is executed.
+
+this object will stay in memory with no references to it, until java's automatic process, called garbage collection, figures out there is no running code with a
+reference to that object and deletes it.
+
+##############################################################################################
+
+Static versus Instance Variables - Static variables are also known as static member variables. Every instance of the class shares the same static variable.
+      So if changes are made to that variable, all other instances of that class will see effect of that change. So we should always use the class name to access
+      a static variable value instead of object. An instance isn't required to exist, to access the value of a static variable (Dog.genus - in static variables
+      don't have to instantiate a class or creating an object to get it's value, we can use class name.static variable name).
+
+      example:
+
+      class Dog {
+        static String genus = "Canis";
+
+        void printData() {
+            Dog d = new Dog();
+            System.out.println(d.genus); // confusing!!!
+            System.out.println(Dog.genus); // clearer that we are accessing the variable value through class Dog each is only possible for static variables.
+        }
+      }
+
+Instances Variables:
+- they don't use the static keyword
+- they are also known as fields, or member variables
+- instance variables belong to a specific instance of a class
+- each instance has it's own copy of an instance variable
+- every instance can have a different value
+- Instance variables represent the state, of a specific instance of a class
+
+##############################################################################################
+
+Static vs instance methods
+
+Static methods:
+- static methods are declared using a static modifier
+- static methods can't access instance methods and instance variables directly
+- they are usually used for operations that don't require any data from an instance of the class (from 'this')
+- 'this' keyword is the current instance of a class, so inside a static method, we can't use the 'this' keyword
+- rule of thumb, a method that doesn't use instance variables, that method should probably be declared as a static method
+- static methods are called as ClassName.methodName(); or methodName(); only if in the same class
+- static methods doesn't require an instance to be created
+
+Instance methods:
+- instance methods belong to an instance, of a class;
+- to use an instance method, we need to instantiate the class first, usually by using the new keyword
+- instances methods, can access instance methods and instance variables directly
+- instance methods can also access static methods and static variables directly (we don't have to use the keyword 'this' and we don't have to use the Class)
+- should a method be static? -> does it use any fields (instance variables) or instance methods? -> if "yes" -> it should probably be an instance method
+-> if "no" it should probably be a static method
+
+##############################################################################################
+
+POJO/bean/JavaBean - Plain Old Java Object (remember that a class can be thought as a super data type):
+- is a class that generally only have instance fields
+- it's used to house data, pass data, between functional classes
+- few if any methods other than getters and setters
+- many database frameworks use POJO's to read data from, or to write data to, database, files or streams.
+- A POJO is sometimes called an Entity, because it mirrors database entities
+- another acronym is DTO, for Data Transfer Object.
+
+Note: A JavaBean is a POJO with extra rules applied to it. This rules allow that Java framework have a standard way to manipulate, and manage these objects.
+
+##############################################################################################
+
+Annotations: (example: @overriden)
+
+- Annotations are a type of metadata;
+- Metadata is a way of formally describing additional information about our code;
+- Annotations are more structured and have more meaning, than comments;
+- This is because they can be used by the compiler, or other types of pre-processing functions, to get information about the code;
+- Metadata doesn't effect how the code runs, so the code will still run, with or without the annotation;
+
+##############################################################################################
+
+Overridden Method
+
+- An overridden method is not the same thing as an overloaded method;
+- An overridden method is a special method in Java, that other classes can implement, if they use a specified method signature;
+- System.out.println(s); is equal to use System.out.println(s.toString()); - this is possible due to built-in feature in Java
+that every object, when passed to System.out.println will have the toString method implicitly executed if we have the @override toString() method implemented
+in our class;
+
+##############################################################################################
+
+Note: Code generated by the IDE (like intellij) for constructors, getter, setters is called "boilerplate code".
+
+##############################################################################################
+
+Record Type (since JDK 14 and officially part of JDK16):
+
+- purpose of replacing the boilerplate code of the POJO, but to be more restrictive.
+- Java calls them "plain data carriers".
+- record is a special class than contains data, that's not meant to be altered.
+- it seeks to achieve immutability, for the data in its members.
+- it contains only the most fundamental methods, such as constructors and accessors.
+- developer don't have ro write or generate any of this code.
+
+example: public record LPAStudent(String id, String name, String dateOfBirth, String classList) {
+
+         }
+
+"String id, String name, String dateOfBirth, String classList" is called record header. The record header consists of a record components,
+a comma delimited list of components.
+For each component in the header, Java generates:
+- A field with the same name and declared type as the record component.
+- The field is declared private and final.
+- The field is sometimes referred to as a component field.
+- Java generates a toString() method that prints out each attribute in a formatted String.
+- Java generate a public accessor method for each component, with same name and type of the component. example access method for "id" is id()
+- record type objects are immutable and don't generate or allow setters methods, only getters to access data
+- so we have immutable records since there are more immutable data transfer objects, and keeping them well encapsulated, this way we protect better data from
+unintended mutations.
+
+Conclusion: if we need to modify object data we should use "POJO" instead of "record type", since "record type" has more restrictions to prevent modifying data.
+
+
+
+
+
+
+
 
 

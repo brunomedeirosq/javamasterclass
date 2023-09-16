@@ -1,0 +1,48 @@
+public class SimpleCalculator {
+
+    //private instance fields for class SimpleCalculator, each object will instantiate this two fields, in this case with Java default values
+    private double firstNumber;
+    private double secondNumber;
+
+    //getters and setters
+    public double getFirstNumber() {
+        return firstNumber;
+    }
+
+    public double getSecondNumber() {
+        return secondNumber;
+    }
+
+    public void setFirstNumber(double firstNumber) {
+        this.firstNumber = firstNumber;
+    }
+
+    public void setSecondNumber(double secondNumber) {
+        this.secondNumber = secondNumber;
+    }
+
+    public double getAdditionResult() {
+        return firstNumber + secondNumber;
+    }
+
+    public double getSubtractionResult() {
+        return firstNumber - secondNumber;
+    }
+
+    public double getMultiplicationResult() {
+        return firstNumber * secondNumber;
+    }
+
+    public double getDivisionResult() {
+        if (secondNumber == 0) {
+            return 0;
+        } else {
+            return firstNumber / secondNumber;
+        }
+
+    }
+
+
+
+
+}
