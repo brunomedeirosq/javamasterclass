@@ -777,6 +777,79 @@ unintended mutations.
 
 Conclusion: if we need to modify object data we should use "POJO" instead of "record type", since "record type" has more restrictions to prevent modifying data.
 
+##############################################################################################
+
+VERY IMPORTANT JAVA CONCEPT : INHERITANCE / inheritance
+
+- as a form of code re-use
+- allow to organize classes into a parent-child hierarchy, which lets the child inherit (re-use), fields and methods from its parents
+- a child class can only have one direct parent in Java, but inherit from its parent class's parent, and so on
+
+example: Class Model for Animal and Dog
+- Dog inherits from Animal
+- Dog 'IS A' type of Animal
+- Dog object will inherit Animal's attributes (type, size and weight)
+- Dog object also will inherit Animal's methods (move and makeNoise)
+- we can specialize Dog class with its own fields and behaviors
+
+public class Dog extends Animal {
+
+    public Dog() {
+            super();
+        }
+
+}
+
+extends
+- Using extends specifies the superclass (or the parent class) of the class we're declaring
+- Dog is a subclass, or a child class, of Animal
+- Animal is a parent, or super class, of Dog
+- class can specify one, and only one, class in its extends clause
+
+super() rules of use
+-  super() is a lot like this()
+- call's a constructor from the super class, directly from the sub class's constructor
+- like this(), it has to be the first statement of the constructor
+- this() and super() can never be called form the same constructor
+- if we don't make a call to super(), then java makes it, using super's default constructor
+- if our super class doesn't have a default constructor, than we must explicitly call super()
+in all of your constructors, passing the right arguments to that constructor
+- all subclasses can execute methods, even though the code is declared on the parent class
+- code doesn't have to be duplicated in each subclass
+- we can use code, from the parent
+- we can change that code for the subclass
+
+Overriding a method
+Overriding a method means we create a method on a subclass, which has the same signature (method name and the number and type of parameters)
+as a method on a super class.
+we override a parent class method, when we want the child class to show different behavior for that method.
+
+Important for overridden method:
+1.º it allow to implement completely different behavior, overriding the behavior of the parent
+2.º it can simply call the parent class's method, which is somewhat redundant to do
+3.º the method can call the parent class's method, and include other code to run, so it can extend the functionality for the Dog, for that behavior
+
+example:
+
+ @Override
+    public void move(String speed) {
+        super.move(speed);
+        System.out.println("Dogs walk, run and wag their tail");
+    }
+
+##############################################################################################
+
+Polymorphism
+
+- means many forms: in the class Animal example, Animal can take multiple forms like Animal, Dog or Fish.
+
+Advantages:
+- it makes code simpler
+- it encourages code extensibility
+
+##############################################################################################
+
+
 
 
 
