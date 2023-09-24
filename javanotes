@@ -849,7 +849,13 @@ Advantages:
 
 ##############################################################################################
 
+java.lang.object - special Java class and is intrinsically extended by all classes. We don't have to explicitly extend. Belongs to java.lang
+                   Class object is the root of the class hierarchy. Every class has Object as a superclass.
+                   All objects, including arrays, implement the methods of this class.
 
+Important: Java only supports one class in the extends class. The inheritance tree is cumulative, meaning that PrimarySchoolStudent inherits
+            both Student members, and Object members. Object members are accessible, as long as Student doesn't override them.
+            Because Student override toString(), we no longer can simply call the toString implementation on Object.
 
 
 
