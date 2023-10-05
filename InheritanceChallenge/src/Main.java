@@ -15,7 +15,7 @@ public class Main {
         System.out.println("Age = " + joe.getAge());
         System.out.println("Pay = " + joe.collectPay());
         System.out.print("Double Pay = " + joe.getDoublePay());
-        
+
     }
 
 }

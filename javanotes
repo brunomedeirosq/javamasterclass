@@ -9,7 +9,7 @@ F8 when on debug to step over
 SHIFT+F10 normal run (main)
 ALT+F7 quick locate references for the highlighted word
 ALT+INSERT generate code like getters and setters
-
+CTRL + SHIFT + ENTER add "{" and "}" to code block
 
 psvm create the public static void main method
 sout create a system out println
@@ -679,7 +679,7 @@ Static versus Instance Variables - Static variables are also known as static mem
         void printData() {
             Dog d = new Dog();
             System.out.println(d.genus); // confusing!!!
-            System.out.println(Dog.genus); // clearer that we are accessing the variable value through class Dog each is only possible for static variables.
+            System.out.println(Dog.genus); // clearer that we are accessing the variable value through class Dog which is only possible for static variables.
         }
       }
 
@@ -857,6 +857,213 @@ Important: Java only supports one class in the extends class. The inheritance tr
             both Student members, and Object members. Object members are accessible, as long as Student doesn't override them.
             Because Student override toString(), we no longer can simply call the toString implementation on Object.
 
+##############################################################################################
+
+this vs super "keywords" in Java (review video lesson 94 very important)
+
+super - allow to access or call parent class members (variables and methods)
+
+Note: super is commonly used with method overriding, when we call a method with same name, from the parent class.
+
+class SubClass extends SuperClass { //subclass aka child class
+ //overrides methods from the parent class
+ @Override
+ public void printMethod(){
+    super.printMethod(); //calls the method in the SuperClass (parent)
+    System.out.println("Printed in Subclass.");
+ }
+}
+
+this - allow to call current class members (variables and methods)
+
+Important: We can use either of them anywhere in a class, except for static elements, like a static method.
+Any attempt to do so there, will lead to compile time errors.
+
+Note: this is required, when there is a parameter with same name, as an instance variable or field.
+
+public void setColor(String color) {
+//this keyword is required, same parameter name as field
+this.color = color;
+}
+
+public String getColor() {
+//this is optional
+return color; //same as return this.color;
+}
+
+this() vs super() call "keywords" in Java (a constructor can have a call to super() or this(), but never both)
+
+These are known as calls, since it looks like a regular method call, although we're calling certain constructors.
+
+this() - allow to call a constructor, from another overloaded constructor in the same class. this() can only be used in a constructor, and it
+         must be the first statement in a constructor. it's used with constructor chaining, when one constructor calls another constructor, and
+         it helps to reduce duplicated code.
+
+super() - only way to call a parent constructor, is by calling super(), which calls the parent constructor. The call to super() must be the first
+          statement in each constructor.
+
+Important: java compiler puts a default call to super(), if we don't add it, and it's always a call to the no argument constructor,
+            which is inserted by the compiler.
+
+##############################################################################################
+
+method overloading vs method overriding (review important concepts in video lesson 95)
+
+Methods will be considered overloaded if both methods follow the following rules:
+- methods must have the same method name;
+- methods must have different parameters;
+If methods follow the rules above:
+- they may or may not have different return types;
+- they may or may not have different access modifiers;
+- they may or may not throw different checked or unchecked exceptions.
+
+Note: method overloading, can also be called as compile-time polymorphism. This means the compiler is determining the right method to call,
+      based on the method name and argument list.
+
+Method overriding, means defining a method in a child class, that already exists in the parent class, with the same signature (the same name, same arguments).
+extending parent class, the child class gets all the methods defined in the parent class (those methods are also known as derived methods).
+
+Note: Method overriding is also known as Runtime Polymorphism, or Dynamic Method Dispatch,
+      because the method that is going to be called, is decided at runtime, by the Java virtual machine.
+
+Important: We can't override static methods, only instance methods can be overridden.
+
+A method will be considered overridden, if we follow these rules.
+- it must have the same name and same arguments;
+- return type can be a subclass of the return type in the parent class;
+- it can't have a lower access modifier. In other words, it can't have more restrictive access privileges;
+- For example, if the parent's method is protected, then using private in the child's overridden method is not allowed. However, using public for the
+    child's method would be allowed, in this example.
+
+Important points about overriding:
+- only inherited methods can be overridden, methods can be overridden only in child classes;
+- constructors and private methods cannot be overridden;
+- methods that are final cannot be overridden;
+- a subclass can user super.methodName() to call the superclass version of an overridden method.
+
+##############################################################################################
+
+Text Block (JDK 15) - special format for multi-line String literals. It's simply a String, with new representation in the source code.
+
+Example:
+public class Main {
+
+    public static void main(String[] args) {
+
+        String bulletIt = "Print a Bulleted List:\n" +
+                "\t\u2022 First Point\n" +
+                "\t\t\u2022 Sub Point";
+
+        System.out.println(bulletIt);
+
+        // text between triples quotes is a text block and printed as was written with tabs and new lines without using the \t or \n like in previous example
+        String textBlock = """
+                Print a Bulleted List:
+                        \u2022 First Point
+                            \u2022 Sub Point
+                """;
+
+        System.out.println(textBlock);
+
+    }
+
+}
+
+##############################################################################################
+
+Format specifiers using printf
+
+%d format specifier that start with % symbol and ends with conversion symbol, in this case, "d" for decimal integer value. But we can have between % and d, several
+    options.
+
+// printf doesn't end with a new line, but this method as multiple arguments, the first is a String which will be printed to
+// %d is a placeholder for other data
+int age = 35;
+System.out.printf("Your age is %d\n", age);
+
+int yearOfBirth = 2023 - age;
+
+System.out.printf("Age = %d, Birth year = %d", age, yearOfBirth);
+
+Format specifiers using format from class String, static methods:
+
+ //two format methods on String class, static methods. we are using them through the class "String.format"
+
+        String formattedString = String.format("Your age is %d",age);
+        System.out.println(formattedString);
+
+        formattedString = "Your age is %d".formatted(age);
+        System.out.println(formattedString);
+
+##############################################################################################
+
+String vs StringBuilder
+
+String Class - Because String is immutable, each method call returns a new instance of a String.
+
+Instantiating String Objects:
+
+String hello = "Hello";
+String helloWorld = "Hello" + "World";
+String badHello = new String("Hello"); // Valid code, but redundant
+
+StringBuilder Class - Java provides a mutable class that lets us change its text value.
+
+Instantiating StringBuilder Objects:
+
+StringBuilder helloBuilder = new StringBuilder("Hello");
+StringBuilder emptyBuilder = new StringBuilder();
+StringBuilder emptyBuilder5 = new StringBuilder(5);
+StringBuilder stringBuilder = new StringBuilder(helloBuilder);
+
+There are four ways to create a new StringBuilder object, using the new keyword:
+- Pass a String;
+- Pass no arguments at all;
+- Pass an integer value;
+- Pass some other type of character sequence (like StringBuilder).
+
+String methods vs StringBuilder methods:
+
+- String methods create a new object in memory, and return a reference to this new object.
+
+- StringBuilder methods return a StringBuilder reference, but it's really a self-reference or a reference to the same object.
+  Unlike Strings we can call methods on StringBuilder, without the need to assign the results to intermediate variables, as we saw with Strings.
+  StringBuilder methods return this self-reference, to support chaining methods together.
+
+
+Example to show difference between String (immutable) and StringBuilder (mutable):
+
+public class Main {
+    public static void main(String[] args) {
+
+        String helloWorld = "Hello" + " World";
+        helloWorld.concat(" and Goodbye");
+
+        StringBuilder helloWorldBuilder = new StringBuilder("Hello" + " World");
+        helloWorldBuilder.append(" and Goodbye");
+
+        printInformation(helloWorld);
+        printInformation(helloWorldBuilder);
+
+    }
+
+    public static void printInformation(String string) {
+        System.out.println("String = " + string);
+        System.out.println("Length = " + string.length());
+    }
+
+    public static void printInformation(StringBuilder builder) {
+        System.out.println("String = " + builder);
+        System.out.println("Length = " + builder.length());
+    }
+
+}
+
+Output:
+String = Hello World
+Length = 11
+String = Hello World and Goodbye
+Length = 23
 
 
 
