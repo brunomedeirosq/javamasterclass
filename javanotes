@@ -1065,6 +1065,27 @@ Length = 11
 String = Hello World and Goodbye
 Length = 23
 
+############################################################################################## SLIDE 101
+
+Composition, Polymorphism, Encapsulation
+
+Inheritance defines an IS A relationship
+
+Composition defines an HAS A relationship
+
+Important: Why is Composition preferred over Inheritance in many designs?
+
+The reasons composition is preferred over inheritance:
+- Composition is more flexible. You can add parts in, or remove them, and these changes are less likely to have a downstream effect.
+- Composition provides functional reuse outside of the class hierarchy, meaning classes can share attributes & behavior, by having similar components,
+    instead of inheriting functionality from a parent or base class.
+- Java's inheritance breaks encapsulation, because subclasses may need direct access to a parent's state or behavior.
+- Inheritance is less flexible since adding a class to, or removing a class from, a class hierarchy, may impact all subclasses from that point.
+- In addition, a new subclass may not need all the functionality or attributes of its parent class.
+
+
+
+
 
 
 
