@@ -1083,6 +1083,128 @@ The reasons composition is preferred over inheritance:
 - Inheritance is less flexible since adding a class to, or removing a class from, a class hierarchy, may impact all subclasses from that point.
 - In addition, a new subclass may not need all the functionality or attributes of its parent class.
 
+############################################################################################## SLIDE 104
+
+Encapsulation (why hide things in Java)
+
+- to make the interface simpler, hide unnecessary details;
+- protect integrity of data on an object, hide or restrict access to some of the data and operations;
+- To decouple the published interface from the internal details of the class, we may hide actual names and types of class members.
+
+Problems when not using encapsulation properly:
+
+- allow direct access to data on an object, bypassing checks, and additional processing that our class through specific methods has in place to manage data;
+- allowing direct access to fields, means calling code would need to change, when we edit any of the fields;
+- Omitting a constructor, that would accept initialization data, may mean the calling code is responsible for setting up this data, on the new object.
+
+Always use encapsulation:
+
+- protect the members of the class, and some methods, from external access;
+- prevents calling code from bypassing the rules and constraints, we've built into the class;
+- when creating a new instance, it's initialized with valid data;
+- we are making sure that there's no direct access to the fields.
+
+Encapsulation principles:
+
+- create constructors for object initialization, which enforces that only objects with valid data will get created;
+- use the private access modifier for your fields;
+- use setter and getter methods sparingly, and only as needed;
+- use access modifiers that aren't private, only for the methods that the calling code needs to use.
+
+############################################################################################## SLIDE 107/108
+
+Polymorphism (very important concept and example of encapsulation and polymorphism on java project "Polymorphism" slide 108)
+
+- ability to execute different behavior, for different types, which are determined at runtime.
+- in the polymorphism example the two next lines in the main method allowed this different behavior with the great advantage
+  of enabling the writing generic code, based on the base class, or a parent class. And this code in the main class is extendable,
+  meaning is doesn't have to change, as new subclasses become available.
+
+ Movie movie = Movie.getMovie(type,title);
+ movie.watchMovie();
+
+ This code can handle any instance that are a Movie, or a subclass of movie, that are returned from the factory method (example below).
+
+  public static Movie getMovie(String type, String title) {
+         return switch (type.toUpperCase().charAt(0)) {
+             case 'C' -> new Comedy(title);
+             case 'A' -> new Adventure(title);
+             case 'S' -> new ScienceFiction(title);
+             default -> new Movie(title);
+         };
+     }
+
+############################################################################################## SLIDE 109
+
+var - special contextual keyword in Java, that lets our code take advantage of "Local Variable Type Inference" (LVTI introduced on Java 10)!
+
+It's called Local Variable Type Inference for a reason, because:
+- it can't be used in field declarations on a class.
+- it can't be used in method signatures, either as a parameter type or a return type.
+- it can't be used without an assignment, because the type can't be inferred in that case.
+- it can't be assigned a null literal, again because a type can't be inferred in that case.
+
+examples:
+
+var airplane = Movie.getMovie("C","Airplane");
+airplane.watchMovie();
+
+var plane = new Comedy("Airplane");
+plane.watchComedy();
+
+Run Time vs Compile Time Typing
+
+compile time type => declared type, this type is declared either as a variable reference, or a method return type, or a method parameter, for example.
+
+Note: in many cases, the compile time type, is the declared type to the left of the assignment operator.
+
+run time => we don't declare a type for the compiled reference type, it gets inferred, but the byte code is the same, as if we had declared it.
+
+Note: what is returned on the right side of the assignment operator, from whatever expression or method is executed, sometimes can only be determined at runtime,
+      when the code is executing conditionally, through the statements in the code.
+
+Important:
+
+it's possible to assign a runtime instance, to a different compile time type, only if certain rules are followed.
+One example of this use case:
+    inheritance rule => we can assign an instance to a variable of the same type, or a parent type, or a parent's parent type, including java.lang.Object, the ultimate base class.
+
+Conclusion:
+
+Why are runtime types different than compile time types?
+
+Because of polymorphism. Polymorphism let us write code once, in a more generic fashion. These two lines of code, using a simple compile type of Movie, actually supported four different runtime types.
+
+ Movie movie = Movie.getMovie(type,title);
+ movie.watchMovie();
+
+Each type was able to execute behavior unique to the class.
+
+############################################################################################## SLIDE 110 - OOP Part2 - Polymorphism - Testing the runtime type using the instanceof operator
+
+And how do we test what the runtime type, of a variable really is at runtime, if the declared type is something else?
+
+Examples on approach to deal with casting over generic objects in runtime:
+
+Object unknownObject = Movie.getMovie("C", "Airplane");
+
+if (unknownObject.getClass().getSimpleName() == "Comedy") {
+    Comedy c = (Comedy) unknownObject;
+    c.watchComedy();
+} else if (unknownObject instanceof Adventure) {
+    ((Adventure) unknownObject).watchAdventure();
+}
+
+Note:
+    - The instanceof operator, lets you test the type of an object or instance.
+    - The reference variable we are testing, is the left operand.
+    - The type we are testing for, is the right operand.
+    - Adventure is not in quotes, meaning we're not testing the type name, but the actual type.
+    - This operator returns true, if unknownObject is an instance of Adventure.
+
+
+
+
 
 
 
