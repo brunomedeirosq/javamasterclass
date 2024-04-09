@@ -9,6 +9,7 @@ F8 when on debug to step over
 SHIFT+F10 normal run (main)
 ALT+F7 quick locate references for the highlighted word
 ALT+INSERT generate code like getters and setters
+CTRL+O open override methods options
 CTRL + SHIFT + ENTER add "{" and "}" to code block
 
 psvm create the public static void main method
@@ -1202,15 +1203,4 @@ Note:
     - Adventure is not in quotes, meaning we're not testing the type name, but the actual type.
     - This operator returns true, if unknownObject is an instance of Adventure.
 
-
-
-
-
-
-
-
-
-
-
-
-
+############################################################################################## SLIDE
