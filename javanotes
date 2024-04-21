@@ -1203,5 +1203,44 @@ Note:
     - Adventure is not in quotes, meaning we're not testing the type name, but the actual type.
     - This operator returns true, if unknownObject is an instance of Adventure.
 
-############################################################################################## SLIDE
+############################################################################################## SLIDE 116 - Organizing Java Classes, Packages and Import Statements
+
+A package is a namespace that organizes a set of related types. In general, a package corresponds to a folder or directory, on the operating system, but this isn't a requirement.
+When using an IDE, like Intellij, we don't have to worry about how packages and classes are stored on the file system.
+The package structure is hierarchical, meaning we group types in a tree fashion. Common practise, packages names should be all lower case.
+
+Example:
+
+In the following code, we're telling Java to import all classes from the java.util package, with the use of the asterisks, after the java.util package reference.
+
+import java.util.*;
+
+Another important example, we might have a package for utility classes, that can provide common functionality, for all of our classes to access.
+
+Packages let us organize our classes by functionality, or relationships.
+
+Packages also let us encapsulate our classes, from classes in other packages.
+
+There can be only one package statement, because a class or type can only be in a single package.
+
+A class's fully qualified class name (FQCN) consists of the package name and the class name.
+
+package dev.lpa.package_one;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(Strings[] args) {
+        Scanner scanner = new Scanner(System.in);
+    }
+
+}
+
+So this class's fully qualified name is, dev.lpa.package_one.Main.
+
+As another example, the FQCN of the Scanner Class in this code, is java.util.Scanner
+
+If we don't define packages for our classes, the default package is used, however there is a main disadvantage, we can't import types from the default package into other classes,
+outside of the default package. In other words, we can't qualify the name, if it's in the default package, and we can't import the classes from the default package.
 
