@@ -448,7 +448,7 @@ you can observe that the compiler notifies to handle IOException, along with Fil
 Unchecked exceptions − An unchecked exception is an exception that occurs at the time of execution. These are also called as Runtime Exceptions.
 These include programming bugs, such as logic errors or improper use of an API. Runtime exceptions are ignored at the time of compilation.
 
-For example, if you have declared an array of size 5 in your program, and trying to call the 6th element of the array then an ArrayIndexOutOfBoundsExceptionexception occurs.
+For example, if you have declared an array of size 5 in your program, and trying to call the 6th element of the array then an ArrayIndexOutOfBoundsException exception occurs.
 
 Errors − These are not exceptions at all, but problems that arise beyond the control of the user or the programmer.
 Errors are typically ignored in your code because you can rarely do anything about an error. For example, if a stack overflow occurs, an error will arise.
@@ -1243,4 +1243,177 @@ As another example, the FQCN of the Scanner Class in this code, is java.util.Sca
 
 If we don't define packages for our classes, the default package is used, however there is a main disadvantage, we can't import types from the default package into other classes,
 outside of the default package. In other words, we can't qualify the name, if it's in the default package, and we can't import the classes from the default package.
+
+############################################################################################## SLIDES 117 - ARRAYS
+
+Array - is a data structure that allows us to store multiple values, of the same type, in a single variable.
+
+The default values of a numeric array elements are set to zero.
+
+If we try to access an index that is out of range, Java will give us an ArrayIndexOutOfBoundsException, which indicates that the index is out of range.
+
+The size of an array, once created, is fixed.
+
+ //variable myIntArray stores a reference, means an address to the object in memory, but not the object itself.
+ //the myIntArray stores an address or reference to an array in memory
+ //the new keyword is creating a new object in memory, in this case an array data structure of length 5 and the myIntArray variable is storing the reference/address to that object
+ int[] myIntArray = new int[5];
+ //here we are storing the same reference for the same object created before on a new variable from same type int[] but not creating a new one
+ int[] anotherArray = myIntArray;
+ //both variables are referencing the same array in memory, so there's only one copy of the array
+ //references types represent the address of the variable, rather than the data itself
+
+ Important concept: The simplest way to think of a variable is, it's a way to store a primitive value (a value type), or it's a way to store a reference to an object.
+                    when we pass a variable to an argument, we're never really passing an object, but only the reference(or address) to that object. And Java makes a copy
+                    of that reference, not a copy of the object itself, when it copies the method parameter.
+
+array creation:
+
+int[] integerArray = new int[10]; //integerArray will have 10 elements
+
+we can't change the size of an array, after the array is instantiated.
+
+we can't add or delete elements, we can only assign values to one of the ten elements in this array, in this example.
+
+int[] firstTen = {1,2,3,4,5,6,7,8,9,10}; //this is ok - anonymous array initializer - it' called anonymous because the type isn't included, but java
+can figure it out because it's being used in a declaration statement.
+
+int[] newArray;
+newArray = new int[]{5,4,3,2,1}; //this is ok
+
+int[] newArray;
+however this can't be done:
+newArray = {5,4,3,2,1}; // we can't use anonymous version of the array initializer in a statement outside of a declaration statement.
+
+Array initialization and default element values:
+- primitive types for any kind of numeric primitive is zero (int, double or short)
+- booleans the default value is false
+- for any class type the elements will be initialized to null
+
+example of "for each" or for enhanced loop that allow us to iterate from begin to end from elements without using array indexes position
+so if we are just looking for a way to process elements from start to finish, and not trying to set, swap or sort elements.
+
+ int[] newArray;
+ newArray = new int[5];
+
+ for (int i = 0; i < newArray.length; i++) {
+             newArray[i] = newArray.length - i;
+         }
+
+ for (int element : newArray) {
+            System.out.print(element + " ");
+        }
+
+java.util.Arrays
+
+Arrays Class inherits from java.util.Object's functionality.
+
+Java provides a helper class named java.util.Arrays, providing common functionality,
+these are static methods on Arrays, so are class methods, not instance methods.
+
+example: System.out.println(Arrays.toString(newArray));
+
+Important: An array can be treated like any other object instance in Java.
+
+Example:
+
+Object objectVariable = newArray;
+
+if (objectVariable instanceof int[]) {
+    System.out.println("objectVariable is really an int array");
+}
+
+Object[] objectArray = new Object[3];
+objectArray[0] = "Hello";
+objectArray[1] = new StringBuilder("world");
+objectArray[2] = newArray;
+
+Arrays are usually used to manage many items of the same type.
+
+Some common behavior for arrays would be sorting, initializing values, copying the array and finding an element. -> this behavior isn't on the array itself,
+but it's provided on a helper class, java.util.Arrays
+
+############################################################################################## SLIDES 121 - SEARCHING IN ARRAYS
+
+Using intervals to search - more efficient than linear or sequential search however there are a few considerations to use interval search such as binary search.
+
+In binary search intervals are continually split into two, hence the word binary.
+
+the static method, binarySearch is on the Array class:
+
+- the array must be sorted
+- if there are duplicate values in the array, there's no guarantee which one it'll match on
+- elements must be comparable. Trying to compare instances of different types, may lead to errors and invalid results
+
+This method returns:
+
+- the position of a match if found
+- returns -1 when no match was found
+- a positive number may not be the position of the first match
+
+############################################################################################## SLIDES 125 - Variable Arguments(Varargs)
+
+Arrays as method parameters
+
+public static void main(String... args) {
+
+}
+
+instead of the usual
+
+public static void main(String[] args) {
+
+}
+
+(String... args) is a special designation for Java, that means, Java will take zero, one, or many Strings, as arguments to this method, and create an array with
+which to process them, in the method.
+
+When can we use variable arguments (varargs)?
+- There can be only one variable argument in a method
+- The variable argument must be the last argument
+
+public class Main {
+
+    public static void main(String... args) {
+        System.out.println("Hello World!");
+
+        String[] splitString = "Hello World Again".split(" ");
+        printText(splitString);
+
+        System.out.println("_".repeat(20));
+        printText("Hello");
+
+        System.out.println("_".repeat(20));
+        printText("Hello", "World", "again");
+
+        System.out.println("_".repeat(20));
+        printText();
+
+
+
+    }
+
+    private static void printText(String... textList) {
+        for (String text:
+             textList) {
+            System.out.println(text);
+        }
+    }
+
+}
+
+
+mutating method - meaning it has impact on the calling code's data. when data passed as parameter in the called method is modified by the method.
+
+############################################################################################## SLIDES 128 - Two-Dimensional Arrays
+
+initialize two-dimensional, and define the size of the nested arrays, as shown here.
+
+int[][] myArray = new int[3][3];
+
+This statement says we have an array of 3 nested arrays, and each nested array will have three ints.
+
+int[][] mySecondArray = new int[3][];
+
+initialization is an array of 3 null elements. We are limited to assigning integer arrays to these elements, but they can be any length.
 
