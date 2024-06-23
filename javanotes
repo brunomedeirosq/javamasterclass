@@ -755,10 +755,10 @@ Record Type (since JDK 14 and officially part of JDK16):
 
 - purpose of replacing the boilerplate code of the POJO, but to be more restrictive.
 - Java calls them "plain data carriers".
-- record is a special class than contains data, that's not meant to be altered.
+- record is a special class that contains data, that's not meant to be altered.
 - it seeks to achieve immutability, for the data in its members.
 - it contains only the most fundamental methods, such as constructors and accessors.
-- developer don't have ro write or generate any of this code.
+- developer don't have to write or generate any of this code.
 
 example: public record LPAStudent(String id, String name, String dateOfBirth, String classList) {
 
@@ -775,6 +775,8 @@ For each component in the header, Java generates:
 - record type objects are immutable and don't generate or allow setters methods, only getters to access data
 - so we have immutable records since there are more immutable data transfer objects, and keeping them well encapsulated, this way we protect better data from
 unintended mutations.
+
+Records are designed to be a concise way to create immutable data objects. They automatically generate boilerplate code such as constructors, getters, equals(), hashCode(), and toString() methods, making the code cleaner and easier to maintain.
 
 Conclusion: if we need to modify object data we should use "POJO" instead of "record type", since "record type" has more restrictions to prevent modifying data.
 
@@ -1275,7 +1277,7 @@ we can't change the size of an array, after the array is instantiated.
 
 we can't add or delete elements, we can only assign values to one of the ten elements in this array, in this example.
 
-int[] firstTen = {1,2,3,4,5,6,7,8,9,10}; //this is ok - anonymous array initializer - it' called anonymous because the type isn't included, but java
+int[] firstTen = {1,2,3,4,5,6,7,8,9,10}; //this is ok - anonymous array initializer - it's called anonymous because the type isn't included, but java
 can figure it out because it's being used in a declaration statement.
 
 int[] newArray;
@@ -1416,4 +1418,166 @@ This statement says we have an array of 3 nested arrays, and each nested array w
 int[][] mySecondArray = new int[3][];
 
 initialization is an array of 3 null elements. We are limited to assigning integer arrays to these elements, but they can be any length.
+
+############################################################################################## SLIDES 130 - List, ArrayList, LinkedList, Iterator, Autoboxing
+
+
+#### List
+
+lists = java containers (also called Collections) -> most common classes for lists, are ArrayList and LinkedList.
+
+Java Array vs Java List
+
+Array is mutable, we could set or change values in the array, but we could not resize it.
+
+Java has several classes that allow to add and remove items, and resize a sequence of elements. --> This classes implement a List's behavior.
+
+List is a special type in Java, called an Interface. --> List Interface describes a set of method signatures, that all List classes are expected to have.
+
+A Class can use or implement an interface, which means it agrees to have the methods, that the interface describes.
+
+For "Interface List" the following classes implement this interface, meaning they all have access to List interface methods:
+AbstractList, AbstractSequentialList, ArrayList, AttributeList, CopyOnWriteArrayList, LinkedList, RoleList...etc
+
+#### ArrayList
+
+ArrayList implements the List Interface methods, is a resizable-array implementation of the List interface.
+
+- ArrayList is a class, which maintains an array in memory, that's actually bigger than what we need, in most cases.
+
+- keeps track of the capacity, which is the actual size of the array in memory
+
+- keeps track of the elements that have been assigned or set, which is the size of the ArrayList
+
+- as elements are added to an ArrayList, its capacity may need to grow. This all happens automatically, behind the scenes.
+
+This is why the ArrayList is resizable.
+
+An ArrayList is a resizable-array implementation, meaning, it's not a fixed size, so we don't need to specify the number of elements it will have.
+It will grow automatically as needed.
+
+Useful example:
+
+public class MoreLists {
+
+    public static void main(String[] args) {
+        String[] items = {"apples","bananas","milk","eggs"};
+
+        // .of() is a factory method from List
+        //factory methods is a static method on a class and it returns a new instance of a class for us
+        List<String> list = List.of(items);
+
+
+        System.out.println(list.getClass().getName());
+        //java.util.ImmutableCollections$ListN --> immutable
+
+        //we can't add new strings to list since it is a immutable class
+
+        ArrayList<String> groceries = new ArrayList<>(list);
+        //the result of this instantiation, is a new mutable ArrayList, populated with the elements from the immutable list we passed.
+
+        System.out.println(groceries);
+        groceries.add("yogurt");
+        System.out.println(groceries);
+        System.out.println(groceries.getClass().getName());
+
+    }
+
+}
+
+############################################################################################## SLIDES 134 - Arrays vs. ArrayLists
+
+Feature                                 array                                   ArrayList
+primitives types supported              yes                                         No
+indexed                                 yes                                         yes
+ordered by index                        yes                                         yes
+duplicates allowed                      yes                                         yes
+nulls allowed                           yes for non primitive types                 yes
+resizable                               no                                          yes
+mutable                                 yes                                         yes
+inherits from java.util.Object          yes                                         yes
+implements List interface               No                                          yes
+
+
+
+Instantiating without Values
+
+Arrays:
+
+String[] array = new String[10]; //An array of 10 elements is created, all with null references. The compiler will only permit Strings to be assigned to the elements.
+
+ArrayLists:
+
+ArrayList<String> arrayList = new ArrayList<>(); //An empty ArrayList is created. The compiler will check that only Strings are added to the ArrayList.
+
+Important note: We should use a specific type like "ArrayList<String>", rather than just the Object class, because Java can then perform compile-time type checking.
+
+
+Instantiating Arrays
+
+String[] arrays = new String[] {"first","second","third"}; //the number of elements is fixed, when an array is created
+
+String[] arrays = {"first","second","third"}; //Alternately, we can use this array initializer called anonymous array.
+
+int elementCount = arrays.length; //retrieving number of elements in array
+
+String[][] array2d = {
+{"first","second","third"},
+{"fourth","fifth"}
+}
+
+
+arrays[0]="one"; //assigning an element
+
+String element = arrays[0]; //getting an element
+
+System.out.println(Arrays.toString(arrays)); // there is no built-in support for printing out elements on array so we need to use Arrays.toString, passing the array as an argument
+
+System.out.println(Arrays.deepToString(array2d)); //for printing multi-dimensional array we need to call Arrays.deepToString method, passing the array as an argument
+
+Instantiating Lists and Array Lists
+
+ArrayList<String> arrayList = new ArrayList<>(List.of("first","second","third"));
+
+ArrayList<String> arrayList = new ArrayList<>(List.of("first","second","third")); //List.of method
+
+ArrayList<ArrayLis<String>> multiDList = new ArrayList<>();
+
+int elementCount = arrayList.size(); //retrieving number of elements in ArrayList
+
+arrayList.set(0,"one"); //assigning an element
+
+arrayList.get(0); //getting an element
+
+System.out.println(arrayList); // ArrayLists come with built-in support, for printing out elements, including nested lists.
+
+### Important: Creating Special Kinds of Lists (SLIDE 134)
+
+Using Array.asList --> Returned List is NOT resizeable, but is mutable!
+
+//example of initialization list mutable from array
+var newList = Arrays.asList("Sunday","Monday","Tuesday");
+
+or
+
+String[] days = new String[]{"Sunday","Monday","Tuesday"};
+List<String> newList = Arrays.asList(days);
+
+Using List.of --> Returned List is IMMUTABLE!
+
+//example of initialization list immutable
+var listOne = List.of("Sunday","Monday","Tuesday");
+
+or
+
+String[] days = new String[]{"Sunday","Monday","Tuesday"};
+List<String> listOne = List.of(days);
+
+
+
+
+
+
+
+
 
