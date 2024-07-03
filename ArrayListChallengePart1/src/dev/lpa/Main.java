@@ -1,11 +1,10 @@
 package dev.lpa;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -15,20 +14,18 @@ public class Main {
         //the compiler will check and only permit strings to assigned to this ArrayList since we specified type using ArrayList<String>
 
         ArrayList<String> groceryList = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-        printOptions();
+        printActions();
 
         try {
             manageGroceryList(Integer.parseInt(scanner.nextLine()),groceryList);
         } catch (NumberFormatException e) {
             System.out.println("Invalid Option!");
-            printOptions();
+            printActions();
             manageGroceryList(Integer.parseInt(scanner.nextLine()),groceryList);
         }
     }
 
     private static void manageGroceryList(int option, ArrayList<String> list) {
-        Scanner scanner = new Scanner(System.in);
         while (option != 0) {
             switch (option) {
                 case 1:
@@ -41,7 +38,7 @@ public class Main {
                     for (String item : listToAdd) {
                         addItem(item, list);
                     }
-                    printOptions();
+                    printActions();
                     option = Integer.parseInt(scanner.nextLine());
                     break;
                 case 2:
@@ -54,12 +51,12 @@ public class Main {
                     for (String item : listToRemove) {
                         removeItem(item, list);
                     }
-                    printOptions();
+                    printActions();
                     option = Integer.parseInt(scanner.nextLine());
                     break;
                 default:
                     System.out.println("Invalid option!");
-                    printOptions();
+                    printActions();
                     option = Integer.parseInt(scanner.nextLine());
                     break;
             }
@@ -95,7 +92,7 @@ public class Main {
     }
 
     private static void printList(ArrayList<String> list) {
-        list.sort(null);
+        list.sort(Comparator.naturalOrder());
         if (list.isEmpty()) {
             System.out.println("Your grocery list is empty!");
         } else {
@@ -109,6 +106,24 @@ public class Main {
         System.out.println("1 - to add item(s) to list (comma delimited list)");
         System.out.println("2 - to remove any items (comma delimited list)");
         System.out.println("Enter a number for which action you want to do:");
+    }
+
+    /**
+     *
+     */
+    private static void printActions() {
+        String textBlock = """
+                Available actions:
+                                
+                0 - to shutdown
+                                
+                1 - to add item(s) to list (comma delimited list)
+                                
+                2 - to remove any items (comma delimited list)
+                                
+                Enter a number for which action you want to do:
+                """;
+        System.out.println(textBlock + " ");
     }
 
 

@@ -1573,6 +1573,60 @@ or
 String[] days = new String[]{"Sunday","Monday","Tuesday"};
 List<String> listOne = List.of(days);
 
+############################################################################################## SLIDES 136 - Arrays, ArrayLists & LinkedList (Memory and Big O Notation)
+
+For reference types (meaning anything that's not a primitive type), like a String, or any other object, the array elements aren't the values, but the addresses of the referenced
+object or String.
+
+Important concept: Constant Amortized Time Cost
+
+Java docs declared for the growth of the ArrayList, that adding an element has constant amortized time cost.
+
+If we designate this constant amortized time as O(1)*.
+
+This means that in the majority of cases, the cost is close to O(1), but at certain intervals, the cost is O(n).
+
+    Considerations for Big O Notation:
+    - In a perfect world, an operation's time and complexity would never change. This ideal word, in Big O Notation is O(1), sometimes called constant time.
+    - In many situations, an operation's cost is in direct correlation to the number of elements, n. In Big O Notation this is O(n), sometimes called linear time.
+
+If we add an element to an ArrayList, where the capacity of the List is already allocated, and space is available, the cost is the same each time, regardless of how many elements
+we add.
+
+But as soon as we reach the capacity, and all the elements (all n elements) need to be copied in memory, this single add would have a maximum cost of O(n).
+
+After this operation, that forced a reallocation, any additional add operations go back to O(1), until the capacity is reached again.
+
+As the expensive intervals decrease, the costs gets closer to O(1), so we give it the notation O(1)*.
+
+Important slide for the Big O values, for the most common ArrayList operations or methods.
+
+###### LinkedList
+
+The LinkedList is not indexed at all (There is no array, storing the addresses in a neat ordered way, as we saw with the ArrayList).
+Instead, each element that's added to a linked list, forms a chain, and the chain has links to the previous element, and the next element.
+
+LinkedList - Retrieval of an Element costs more than an ArrayList retrieval. On the other hand, inserting and removing an element, is much simpler for this type
+of collection. A reallocation of memory to accommodate all existing elements, is never required. So for a LinkedList, inserting and removing elements, is generally
+considered cheap in computer currency, compared to doing these functions in an ArrayList.
+
+###### Things to Remember when considering whether to use an ArrayList vs LinkedList
+
+The ArrayList is usually the better default choice for a List, especially if the List is used predominantly for storing and reading data.
+
+If we know the maximum number of possible items, then it's probably better to use an ArrayList, but set it's capacity.
+
+This code demonstrates how to set the capacity of your ArrayList to 500000
+
+int capacity = 500_000;
+ArrayList<String> stringArray = new ArrayList<>(capacity);
+
+An ArrayList index is an int type, so an ArrayList's capacity is limited to the maximum number of elements an int can hold, Integer.MAX_VALUE.
+
+We should consider using a LinkedList if we are adding and processing or manipulating a large amount of elements, and the maximum elements isn't known, but may be great, or
+i our number of elements may exceed Integer.MAX_VALUE
+
+
 
 
 
