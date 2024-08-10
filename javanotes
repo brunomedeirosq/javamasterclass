@@ -1624,10 +1624,35 @@ ArrayList<String> stringArray = new ArrayList<>(capacity);
 An ArrayList index is an int type, so an ArrayList's capacity is limited to the maximum number of elements an int can hold, Integer.MAX_VALUE.
 
 We should consider using a LinkedList if we are adding and processing or manipulating a large amount of elements, and the maximum elements isn't known, but may be great, or
-i our number of elements may exceed Integer.MAX_VALUE
+our number of elements may exceed Integer.MAX_VALUE
 
+############################################################################################## SLIDES 137/138 - LinkedList Part 1/Part 2
 
+A Queue is a First-In-First-Out (FIFO) Data Collection
 
+A double-list queue allows access to both the start and end of the queue.
+
+A LinkedList can be used as a double ended queue.
+
+A Stack is a Last-In, First-Out (LIFO) Data Collection
+
+A LinkedList can be used as a Stack as well.
+
+############################################################################################## SLIDES 139 - Iterator
+
+- Iterator allow to traverse lists, is an object that allows traverse over records in a collection
+
+- the classic way is to use for loops to traverse through elements in an array or list:
+    - traditional for loop and an index to index to index into a list
+    - the enhanced for loop and a collection to step through the elements one at a time
+
+- when we get an instance of an iterator, we can call the next method to get the next element in the list
+- we can use the hasNext method to check if any elements remain to be processed
+
+Iterator vs ListIterator
+
+- An iterator is forwards only and only supports the remove method
+- A ListIterator allows you to navigate both forwards and backwards. Besides the remove method, it also supports the add and set methods
 
 
 
